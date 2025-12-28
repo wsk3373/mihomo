@@ -1,0 +1,33 @@
+mixed-port: 7890
+allow-lan: true
+bind-address: "*"
+mode: rule
+log-level: info
+ipv6: true
+external-controller: 0.0.0.0:9090
+secret: "changeme123"
+
+tun:
+  enable: true
+  stack: system                   # Linux 推荐 system，群晖也稳
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  auto-route: true
+  auto-detect-interface: true
+
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - tls://1.1.1.1:853
+    - tls://dns.google:853
+  fallback-filter:
+    geoip: false
+
+# 下面放你的 proxies、proxy-groups、rules（和上次高级配置一样）

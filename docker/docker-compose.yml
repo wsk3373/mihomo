@@ -1,0 +1,41 @@
+services:
+  metacubexd:
+    container_name: metacubexd
+    image: ghcr.io/metacubex/metacubexd
+    restart: always
+    ports:
+      - '9099:80'
+
+  meta:
+    build:
+      context: .
+      # args:
+      #   HTTP_PROXY: ${HTTP_PROXY}
+      #   HTTPS_PROXY: ${HTTPS_PROXY}
+    image: my-mihomo:latest
+    container_name: meta
+    restart: always
+    # network_mode: host
+    ports:
+      - 710:7890
+      - 9090:9090
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+      - ./config:/root/.config/mihomo
+
+    # 方案A：最简单（推荐测试用）
+    privileged: true
+
+    # 方案B：更安全
+    # cap_add:
+    #   - NET_ADMIN
+    #   - NET_RAW  
+    #   - SYS_ADMIN
+
+    
+    # environment:
+    #   - HTTP_PROXY=${HTTP_PROXY}
+    #   - HTTPS_PROXY=${HTTPS_PROXY}
+    #   - http_proxy=${HTTP_PROXY}
+    #   - https_proxy=${HTTPS_PROXY}
+    #   - ALL_PROXY=${HTTP_PROXY}
