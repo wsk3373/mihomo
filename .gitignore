@@ -3,3 +3,5 @@ venv
 build
 mihomo.egg-info
 *.ipynb
+config.yaml
+config*.yaml
