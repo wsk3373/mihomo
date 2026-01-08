@@ -4,7 +4,7 @@ services:
     image: ghcr.io/metacubex/metacubexd
     restart: always
     ports:
-      - '9099:80'
+      - '9091:80'
 
   meta:
     build:
