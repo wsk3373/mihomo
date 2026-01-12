@@ -4,7 +4,7 @@ services:
     image: ghcr.io/metacubex/metacubexd
     restart: always
     ports:
-      - '9091:80'
+      - 9091:80
 
   meta:
     build:
@@ -21,7 +21,7 @@ services:
       - 9090:9090
     volumes:
       - /dev/net/tun:/dev/net/tun
-      - ./config:/root/.config/mihomo
+      - /etc/mihomo:/root/.config/mihomo
 
     # 方案A：最简单（推荐测试用）
     privileged: true
